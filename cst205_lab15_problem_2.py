@@ -16,8 +16,10 @@ Tell you how many days it is until your next birthday
 What day of the week was the Declaration of Independence ratified by the Continental Congress? (write a program that prints out Monday, Tuesday, etc)
 '''
 
-
+import datetime
 import calendar
+
+
 '''
 year = 1973
 day = 28
@@ -26,6 +28,8 @@ x = calendar.setfirstweekday(calendar.SUNDAY)
 c = calendar.TextCalendar(calendar.SUNDAY)
 c.prmonth(year, month)
 '''
+weekdayNames = [ "Sunday", "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday"]
+
 # Print out a calendar of the month you were born
 def printCalendarByYearMonth(year=1970,month=1):
   if month not in range(1,13):
@@ -45,30 +49,29 @@ def datesTillDate(month, day):
   else:
     year = current_year
     
-  birthday_year
-  d1 = datetime.datetime(current_year,current_month,current_Day)
-  d2 = datetime.datetime(year,month,day)
-  return 1
+  dateCurrent = datetime.datetime(current_year,current_month,current_Day)
+  dateFuture = datetime.datetime(year,month,day)
+  return (dateFuture - dateCurrent).days
   
 def dayOfTheWeekFromDate(month=1, day=1, year=1970):
-  return 1
+  return weekdayNames[datetime.date(year, month, day).weekday()]
 
 
 def main():
   #Get user information
   print("Enter your birthday  MM/DD/YYYY\n")
-  birthday = "10/28/1973"
+  birthday = "10/28/1973" #TODO change to input
   dateElements = birthday.split("/")
   year = int(dateElements[2])
   day = int(dateElements[1])
   month = int(dateElements[0])
  
   #Problem 1
-  print("Here is the calendar for the month you were born")
+  print("Here is the calendar for the month you were born\n")
   printCalendarByYearMonth(year=year,month=month)
 
   #Problem 2
-  print("Days until your next birthday: %i"%datesTillDate(month=month, day=day))
+  print("\nDays until your next birthday: %i"%datesTillDate(month=month, day=day))
   
   #Problem 3
   independenceDay = "7/4/1776"
