@@ -19,16 +19,7 @@ What day of the week was the Declaration of Independence ratified by the Contine
 import datetime
 import calendar
 
-
-'''
-year = 1973
-day = 28
-month = 10
-x = calendar.setfirstweekday(calendar.SUNDAY)
-c = calendar.TextCalendar(calendar.SUNDAY)
-c.prmonth(year, month)
-'''
-weekdayNames = [ "Sunday", "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday"]
+weekdayNames = [ "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 # Print out a calendar of the month you were born
 def printCalendarByYearMonth(year=1970,month=1):
@@ -39,9 +30,10 @@ def printCalendarByYearMonth(year=1970,month=1):
   c.prmonth(year, month) 
    
 def datesTillDate(month, day):
-  current_year = 2017
-  current_month = 12
-  current_Day = 1
+  today = datetime.datetime.now()
+  current_year = today.year
+  current_month = today.month
+  current_Day = today.day
   
   # see if there birthday has already passed this year  
   if current_month > month:
@@ -59,8 +51,7 @@ def dayOfTheWeekFromDate(month=1, day=1, year=1970):
 
 def main():
   #Get user information
-  print("Enter your birthday  MM/DD/YYYY\n")
-  birthday = "10/28/1973" #TODO change to input
+  birthday= requestString("Enter your birthday  MM/DD/YYYY\n")
   dateElements = birthday.split("/")
   year = int(dateElements[2])
   day = int(dateElements[1])
