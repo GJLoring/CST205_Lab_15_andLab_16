@@ -36,7 +36,7 @@ def datesTillDate(month, day):
   current_Day = today.day
   
   # see if there birthday has already passed this year  
-  if current_month > month:
+  if current_month >= month:
     year = current_year + 1
   else:
     year = current_year
