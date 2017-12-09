@@ -24,40 +24,42 @@ FIRST_ROLL_WINNING_OUTCOMES = [7, 11]
 FIRST_ROLL_LOOSING_OUTCOMES = [2, 3, 12]
 SUBSEQUENT_ROLL_LOOSING_NUMBER = 7
 
-rollCount = 1
-gameContinue = True
-gameWin = False
-thePointNumber = 0
-diceOutcome=[0,0]
 
-while gameContinue:
-  # Problem Bullet 1
-  for x in range(NUMBER_OF_DICE):
-    diceOutcome[x] = random.randint(1,NUMBER_OF_SIDE_DICE)
+
+def craps():
+  rollCount = 1
+  gameContinue = True
+  gameWin = False
+  thePointNumber = 0
+  diceOutcome=[0,0]  
+  while gameContinue:
+    # Problem Bullet 1
+    for x in range(NUMBER_OF_DICE):
+      diceOutcome[x] = random.randint(1,NUMBER_OF_SIDE_DICE)
+      
+    sumOfDice = diceOutcome[0] + diceOutcome[1]
     
-  sumOfDice = diceOutcome[0] + diceOutcome[1]
-  
-  # Check for outcomes based on roll number and dice sum
-  if rollCount == 1:
-    if sumOfDice in FIRST_ROLL_WINNING_OUTCOMES:
-      print "Lucky! You won with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )
-      gameContinue = False
-    elif sumOfDice in FIRST_ROLL_LOOSING_OUTCOMES:
-      gameContinue = False
-      print "Sorry you lost on the first roll with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )
+    # Check for outcomes based on roll number and dice sum
+    if rollCount == 1:
+      if sumOfDice in FIRST_ROLL_WINNING_OUTCOMES:
+        print "Lucky! You won with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )
+        gameContinue = False
+      elif sumOfDice in FIRST_ROLL_LOOSING_OUTCOMES:
+        gameContinue = False
+        print "Sorry you lost on the first roll with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )
+      else:
+        thePointNumber = sumOfDice
+        print "No matches on the first roll, %i and %i = %i the point number is %i, Roll again!"%(diceOutcome[0], diceOutcome[1], sumOfDice,thePointNumber)
     else:
-      thePointNumber = sumOfDice
-      print "No matches on the first roll, %i and %i = %i the point number is %i, Roll again!"%(diceOutcome[0], diceOutcome[1], sumOfDice,thePointNumber)
-  else:
-    if sumOfDice == SUBSEQUENT_ROLL_LOOSING_NUMBER:
-      gameContinue = False
-      print "Sorry you lost with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )
-    elif sumOfDice == thePointNumber:
-      print "You won! A %i and %i = %i the point number was %i"%(diceOutcome[0], diceOutcome[1], sumOfDice,thePointNumber)
-      gameContinue = False
-    else:
-      print "No matches, %i and %i = %i the point number is %i, Roll again!"%(diceOutcome[0], diceOutcome[1], sumOfDice,thePointNumber)
-  
-  rollCount = rollCount + 1  
+      if sumOfDice == SUBSEQUENT_ROLL_LOOSING_NUMBER:
+        gameContinue = False
+        print "Sorry you lost with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )
+      elif sumOfDice == thePointNumber:
+        print "You won! A %i and %i = %i the point number was %i"%(diceOutcome[0], diceOutcome[1], sumOfDice,thePointNumber)
+        gameContinue = False
+      else:
+        print "No matches, %i and %i = %i the point number is %i, Roll again!"%(diceOutcome[0], diceOutcome[1], sumOfDice,thePointNumber)
+    
+    rollCount = rollCount + 1  
 
-  
+craps()
