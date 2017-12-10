@@ -21,12 +21,15 @@ To get checked off, be prepared to show:
 '''
 import urllib
 #import re
+import os
 
 #PROBLEM 1
 
 def makePage():
   #replace the directory in the line below with the path to your file
-  file = open("C:\Users\Grace\Desktop\CSUMB\CST205\Module 8\Lab 16\super.html", "wt")
+  #file = open("C:\Users\Grace\Desktop\CSUMB\CST205\Module 8\Lab 16\super.html", "wt")
+  completeFilePath = os.path.join( os.path.dirname(os.path.realpath(__file__)), "super.html")
+  file = open(completeFilePath, "wt")
   file.write("""<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 
   Transition//EN" "http://www.w3.org/TR/html4/loose.dtd">
   
@@ -45,7 +48,9 @@ def makePage():
 
 def web():
     news = urllib.urlopen('http://www.cnn.com').read()
-    file = open("C:\Users\Grace\Desktop\CSUMB\CST205\Module 8\Lab 16\super.html", "wt")
+    #file = open("C:\Users\Grace\Desktop\CSUMB\CST205\Module 8\Lab 16\super.html", "wt")
+    completeFilePath = os.path.join( os.path.dirname(os.path.realpath(__file__)), "super.html")
+    file = open(completeFilePath, "wt")    
     file.write("""<!DOCTYPE html>
     
     <html>
@@ -61,6 +66,7 @@ def web():
     
     #Searching for headlines starting with <strong> tag and ending with </strong> tag
     i = 0
+    news = news.replace("\\u003c", "<") # Headline tags can appear <strong> or \\u003cstrong>, this makes them uniform,same with closeing tag
     start = "<strong>"
     end = "</strong>"
 
@@ -73,17 +79,17 @@ def web():
       if tag == -1:
         break
     
-    #new string starts at tag <strong>
-    #then search for the end tag </strong>
-    news = news[tag:len(news)+1]
-    tag = news.find(end, len(end), len(news))
-    
-    #adds a new header string to the headers list each time <strong> text </strong) is found
-    #increment index i so we can continue to the next set of <strong> tags
-    string = news[len(end)-1:tag]
-    i += tag
-    headers.append(string)
-   
+      #new string starts at tag <strong>
+      #then search for the end tag </strong>
+      news = news[tag:len(news)+1]
+      tag = news.find(end, len(end), len(news))
+      
+      #adds a new header string to the headers list each time <strong> text </strong) is found
+      #increment index i so we can continue to the next set of <strong> tags
+      string = news[len(end)-1:tag]
+      i += tag
+      headers.append(string)
+  
     for text in headers:
       file.write("<li><h3>" + text + "</h3></li><br />")          
       
