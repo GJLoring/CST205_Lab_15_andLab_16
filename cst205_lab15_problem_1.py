@@ -6,23 +6,13 @@
 #  Grace Alvarez
 #  Gabriel Loring
 
-'''
-Problem 1:
-
-Use a function from the random library to simulate rolling dice.  Write a function that rolls a single die and then use that function to build a program that let's the user play craps. The basic rules of craps are:
-
-1. A player rolls two six-sided dice and adds the numbers rolled together.
-2. On this first roll, a 7 or an 11 automatically wins, and a 2, 3, or 12 automatically loses, and play is over. If a 4, 5, 6, 8, 9, or 10 are rolled on this first roll, that number becomes the "point.???
-3. The player continues to roll the two dice again until one of two things happens: either they roll the "point" again, in which case they win; or they roll a 7, in which case they lose.
-'''
-
 import random
 
-NUMBER_OF_DICE = 2
-NUMBER_OF_SIDE_DICE = 6
-FIRST_ROLL_WINNING_OUTCOMES = [7, 11]
-FIRST_ROLL_LOOSING_OUTCOMES = [2, 3, 12]
-SUBSEQUENT_ROLL_LOOSING_NUMBER = 7
+NUMBER_OF_DICE = 2                        # Problem supplied constant
+NUMBER_OF_SIDE_DICE = 6                   # Problem supplied constant
+FIRST_ROLL_WINNING_OUTCOMES = [7, 11]     # Problem supplied rules
+FIRST_ROLL_LOOSING_OUTCOMES = [2, 3, 12]  # Problem supplied rules
+SUBSEQUENT_ROLL_LOOSING_NUMBER = 7        # Problem supplied rule
 
 
 
@@ -40,6 +30,8 @@ def craps():
     sumOfDice = diceOutcome[0] + diceOutcome[1]
     
     # Check for outcomes based on roll number and dice sum
+    # We have two sets of rules for 1st roll and subsequent rolls
+    # the outer if condition is to differentiat between the types of rolls
     if rollCount == 1:
       if sumOfDice in FIRST_ROLL_WINNING_OUTCOMES:
         print "Lucky! You won with a %i and %i = %i"%(diceOutcome[0], diceOutcome[1], sumOfDice )

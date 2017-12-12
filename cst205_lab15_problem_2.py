@@ -7,15 +7,6 @@
 #  Gabriel Loring
 
 
-'''
-Problem 2:
-Have some fun with different library functions by figuring out how to get Python to:
-
-Print out a calendar of the month you were born
-Tell you how many days it is until your next birthday
-What day of the week was the Declaration of Independence ratified by the Continental Congress? (write a program that prints out Monday, Tuesday, etc)
-'''
-
 import datetime
 import calendar
 
@@ -23,6 +14,10 @@ weekdayNames = [ "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Satur
 
 # Print out a calendar of the month you were born
 def printCalendarByYearMonth(year=1970,month=1):
+  '''
+  Use python to print out a calander for a 
+  given year and month
+  '''
   if month not in range(1,13):
     print(month)
     raise
@@ -30,6 +25,12 @@ def printCalendarByYearMonth(year=1970,month=1):
   c.prmonth(year, month) 
    
 def datesTillDate(month, day):
+  '''
+  Use python date math to compute difference between
+  two month / days.  Make sure not to compute a negatie
+  if the current month is greater then the target month
+  then we need to set our target year to current year + 1
+  '''
   today = datetime.datetime.now()
   current_year = today.year
   current_month = today.month
@@ -46,10 +47,19 @@ def datesTillDate(month, day):
   return (dateFuture - dateCurrent).days
   
 def dayOfTheWeekFromDate(month=1, day=1, year=1970):
+  '''
+  Use a dictionary to convert between pythons methode of returning
+  an integer to represent day of the week to the problem requirment
+  that we return the english name of the day of the week
+  '''
   return weekdayNames[datetime.date(year, month, day).weekday()]
 
 
 def main():
+  '''
+  Execute all the problems for the lab
+  '''
+  
   #Get user information
   birthday= requestString("Enter your birthday  MM/DD/YYYY\n")
   dateElements = birthday.split("/")
